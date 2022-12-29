@@ -9,7 +9,8 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-body {
+body,
+input {
   font-family: "Oswald", sans-serif;
 }
 .container {
@@ -19,23 +20,23 @@ body {
   margin-right: auto;
 }
 /* Small Media */
-@media (min-width: 768px){
-  .container{
-      width: 750px;
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
   }
 }
 
 /* Medium Media */
-@media (min-width: 992px){
-  .container{
-      width: 970px;
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
   }
 }
 
 /* Large Media */
-@media (min-width: 1200px){
-  .container{
-      width: 1170px;
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
   }
 }
 /* End Global Rules*/
@@ -62,3 +63,40 @@ nav ul li a {
   padding: 5px;
   margin: 0 5px;
 }
+nav #users {
+  display: none;
+}
+/* Start Form  */
+.section-form .form-content {
+  margin-top: 15px;
+  padding: 20px;
+  justify-content: center;
+  background-color: cornflowerblue;
+}
+.section-form .form-content h2 {
+  font-size: 50px;
+  letter-spacing: 2px;
+  color: #52057b;
+}
+.section-form .form-content form {
+  width: 40%;
+  text-align: center;
+}
+.section-form .form-content input {
+  display: block;
+  width: 100%;
+  margin: 5px 0;
+  height: 40px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+.section-form .form-content input[type="submit"] {
+  font-size: 35px;
+  text-transform: uppercase;
+  height: auto;
+  cursor: pointer;
+}
+.section-form .form-content input[type="submit"]:hover {
+  opacity: 0.8;
+}
+/* End Form  */
