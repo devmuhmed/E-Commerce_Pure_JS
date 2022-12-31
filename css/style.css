@@ -10,7 +10,8 @@
   box-sizing: border-box;
 }
 body,
-input {
+input,
+button {
   font-family: "Oswald", sans-serif;
 }
 .container {
@@ -56,15 +57,59 @@ header {
 nav ul {
   list-style: none;
 }
+nav ul#users {
+  display: none;
+  align-items: center;
+}
+ul#users li {
+  position: relative;
+}
+ul#users li i {
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+}
+nav ul#users li .badge {
+  width: 20px;
+  height: 20px;
+  color: white;
+  text-align: center;
+  display: block;
+  background-color: crimson;
+  position: absolute;
+  border-radius: 50%;
+  top: -10px;
+  right: -12px;
+  font-size: 10px;
+  line-height: 20px;
+  display: none;
+}
+nav ul#users .carts-products {
+  position: absolute;
+  width: 200px;
+  transform: translate(-42%, 0);
+  background-color: #eaeaea;
+  top: 44px;
+  padding: 10px;
+  border: 1px solid green;
+  display: none;
+}
+nav ul#users .carts-products a {
+  display: block;
+  background-color: darkgreen;
+  color: white;
+  margin: 0;
+  padding: 6px;
+  text-align: center;
+  text-decoration: none;
+}
 nav ul li a {
   display: block;
   color: white;
-  min-width: 50px;
-  padding: 5px;
+  min-width: 40px;
   margin: 0 5px;
-}
-nav #users {
-  display: none;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 /* Start Form  */
 .section-form .form-content {
@@ -100,3 +145,42 @@ nav #users {
   opacity: 0.8;
 }
 /* End Form  */
+/* Start Product */
+.content-products {
+  width: 60%;
+  margin: 10px 0;
+}
+.content-products .product-item {
+  width: 100%;
+  border: 1px solid #ddd;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.product-item-img {
+  width: 25%;
+  height: 150px;
+  margin-right: 10px;
+}
+.product-item-action {
+  flex: 1;
+  text-align: right;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.product-item-action .add-to-cart {
+  display: block;
+  margin-left: auto;
+  background-color: darkgreen;
+  color: white;
+  border: 0;
+  padding: 10px 20px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.product-item-action i {
+  cursor: pointer;
+  display: block;
+  width: 20px;
+  margin-left: auto;
+}
+/* End Product */

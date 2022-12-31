@@ -3,8 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shopping Cart | Home Page</title>
+    <title>Shopping Cart | Cart Product</title>
     <!-- Font Awesome Library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Google Fonts-->
     <link
       href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&display=swap"
       rel="stylesheet"
@@ -33,6 +41,14 @@
               <li>
                 <a href="#" id="user"></a>
               </li>
+              <li class="shoppingCart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge">1</span>
+                <div class="carts-products">
+                  <div></div>
+                  <a href="cartproducts.html">view all products</a>
+                </div>
+              </li>
               <li>
                 <a href="#" id="logout">Logout</a>
               </li>
@@ -42,13 +58,13 @@
       </div>
     </header>
     <!-- End Header -->
-    <!-- Start Form  -->
-    <section class="section-form">
+    <!-- start product -->
+    <section class="Products">
       <div class="container">
-        <div class="form-content d-flex">Home Page</div>
+        <div class="content-products">cart products</div>
       </div>
     </section>
-    <!-- End Form  -->
+    <!-- start product -->
     <script src="js/script.js"></script>
   </body>
 </html>
