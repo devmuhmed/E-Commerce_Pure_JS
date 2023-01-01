@@ -1,54 +1,15 @@
-let users = document.querySelector("#users");
-let user = document.querySelector("#user");
-let links = document.querySelector("#links");
-let logout = document.querySelector("#logout");
-let username = localStorage.getItem("username");
-if (username) {
-  console.log(users);
-  links.remove();
-  users.style.display = "flex";
-  user.innerHTML = username;
-}
-logout.addEventListener("click", function () {
-  localStorage.clear();
-  setTimeout(() => {
-    window.location = "register.html";
-  }, 1500);
-});
-// Define Products
-let products = [
-  {
-    id: 1,
-    title: "headphone item",
-    size: "large",
-    imageUrl: "img/headphone.jpeg",
-  },
-  {
-    id: 2,
-    title: "glasses item",
-    size: "large",
-    imageUrl: "img/glasses.jpg",
-  },
-  {
-    id: 3,
-    title: "laptop item",
-    size: "large",
-    imageUrl: "img/laptop.jpg",
-  },
-  {
-    id: 4,
-    title: "watch item",
-    size: "large",
-    imageUrl: "img/watch.jpeg",
-  },
-];
+//setup variable
 let productDom = document.querySelector(".content-products");
 let cartProductDivDom = document.querySelector(".carts-products div");
 let cartProductMenu = document.querySelector(".carts-products");
 let shoppingCartIcon = document.querySelector(".shoppingCart");
 let badgeDom = document.querySelector(".badge");
-shoppingCartIcon.addEventListener("click", openCartMenue);
-function getProductsUi() {
+let products = JSON.parse(localStorage.getItem("products"))
+// open card menu
+shoppingCartIcon.addEventListener("click", openCartMenu);
+// display product
+let getProductsUi;
+(getProductsUi = function (products = []) {
   let productsUi = products.map((item) => {
     return `
         <div class="product-item d-flex">
@@ -58,7 +19,7 @@ function getProductsUi() {
             class="product-item-img"
             />
             <div class="product-item-desc">
-              <h2>${item.title}</h2>
+              <h2 onclick="saveItemData(${item.id})">${item.title}</h2>
               <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
               <span>Size: ${item.size}</span>
             </div>
@@ -72,26 +33,37 @@ function getProductsUi() {
         `;
   });
   productDom.innerHTML = productsUi;
+})(JSON.parse(localStorage.getItem("products")));
+// Check if there's item in localstorage
+let addedItem = [];
+(function cartMenuData(){
+  addedItem = localStorage.getItem("productsInCart")
+  ? JSON.parse(localStorage.getItem("productsInCart"))
+  : [];
+if (addedItem) {
+  addedItem.map(
+    (item) => (cartProductDivDom.innerHTML += `<p>${item.title}</p>`)
+  );
+  badgeDom.style.display = "block";
+  badgeDom.innerHTML = addedItem.length;
 }
-getProductsUi();
-function checkLogedUser() {
+})();
+// Add to cart
+function addToCart(id) {
   if (localStorage.getItem("username")) {
-    // window.location = "cartproducts.html"
+    let choosenItem = products.find((item) => item.id === id);
+    cartProductDivDom.innerHTML += `<p>${choosenItem.title}</p>`;
+    addedItem = [...addedItem, choosenItem];
+    localStorage.setItem("productsInCart", JSON.stringify(addedItem));
+    let cartProductItems = document.querySelectorAll(".carts-products div p");
+    badgeDom.style.display = "block";
+    badgeDom.innerHTML = cartProductItems.length;
   } else {
     window.location = "login.html";
   }
 }
-
-function addToCart(id) {
-  let cartProductItems = document.querySelectorAll(".carts-products div p");
-  let choosenItem = products.find((item) => {
-    return item.id === id;
-  });
-  cartProductDivDom.innerHTML += `<p>${choosenItem.title}</p>`;
-  badgeDom.style.display = "block";
-  badgeDom.innerHTML = cartProductItems.length + 1;
-}
-function openCartMenue() {
+// open card menu
+function openCartMenu() {
   if (cartProductDivDom.innerHTML != "") {
     if (cartProductMenu.style.display == "block") {
       cartProductMenu.style.display = "none";
@@ -100,3 +72,21 @@ function openCartMenue() {
     }
   }
 }
+function saveItemData(id){
+  localStorage.setItem("productId",id)
+  window.location = "cartdetails.html"
+}
+// search function 
+let inputSearch = document.querySelector("#search");
+inputSearch.addEventListener("keyup", function(e){
+  if(e.keyCode === 13){
+    search(e.target.value, JSON.parse(localStorage.getItem("products")))
+  }
+  if(e.target.value.trim() === "")
+  getProductsUi(JSON.parse(localStorage.getItem("products")))
+})
+function search(title,myArray){
+  let arr = myArray.filter( item => item.title === title)
+  getProductsUi(arr);
+}
+// search("headphone item",JSON.parse(localStorage.getItem("products")))
