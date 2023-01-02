@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart | Login Page</title>
+    <!-- Font Awesome Library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Google Fonts-->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!--Render All Elements Normally -->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <!--Main Template CSS File -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/register.css" />
+  </head>
+  <body>
+    <!-- Start header Section -->
+    <header>
+      <div class="container">
+        <div class="header-content d-flex">
+          <a href="index.html" class="brand-logo"> Shopping Cart </a>
+          <nav>
+            <ul class="d-flex" id="links">
+              <li>
+                <a href="login.html">Sign In</a>
+              </li>
+              <li>
+                <a href="register.html">Sign Up</a>
+              </li>
+            </ul>
+            <ul id="users">
+              <li>
+                <a href="#" id="user"></a>
+              </li>
+              <li class="shoppingCart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge">1</span>
+                <div class="carts-products">
+                  <div></div>
+                  <a href="cartproducts.html">view all products</a>
+                </div>
+              </li>
+              <li>
+                <a href="#" id="logout">Logout</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- End header Section -->
+    <!-- start product -->
+    <section class="Products">
+      <div class="container">
+        <div class="content-products">
+        </div>
+        <div class="noproducts">
+        </div>
+      </div>
+    </section>
+    <!-- start product -->
+    <script src="js/user.js"></script>
+    <script src="js/favorites.js"></script>
+  </body>
+</html>

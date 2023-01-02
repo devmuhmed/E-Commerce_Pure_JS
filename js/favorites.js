@@ -1,12 +1,12 @@
 let productDom = document.querySelector(".content-products");
 let noProductsDom = document.querySelector(".noproducts");
-function drawCartProductsUi(allProducts = []) {
-  if (JSON.parse(localStorage.getItem("productsInCart")).length === 0) 
+function drawFavoritesProductsUi(allProducts = []) {
+  if (JSON.parse(localStorage.getItem("productsFavorite")).length === 0) 
     noProductsDom.innerHTML = "<h1>there's no item</h1>";
     noProductsDom.style.textAlign = "center";
   
   let products =
-    JSON.parse(localStorage.getItem("productsInCart")) || allProducts;
+    JSON.parse(localStorage.getItem("productsFavorite")) || allProducts;
   let productsUi = products.map((item) => {
     return `
           <div class="product-item d-flex">
@@ -22,8 +22,8 @@ function drawCartProductsUi(allProducts = []) {
                 <span>Quantity: ${item.qty}</span>
               </div>
               <div class="product-item-action d-flex"> 
-                <button class="add-to-cart" onclick="removeItemFromCart(${item.id})">
-                  Remove From Cart
+                <button class="add-to-cart">
+                  Remove From Favorites
                 </button>
               </div>
             </div>
@@ -31,13 +31,13 @@ function drawCartProductsUi(allProducts = []) {
   });
   productDom.innerHTML = productsUi;
 }
-drawCartProductsUi();
-function removeItemFromCart(id) {
-  let productsInCart = localStorage.getItem("productsInCart");
-  if (productsInCart) {
-    let items = JSON.parse(productsInCart);
-    let filteredItems = items.filter((item) => item.id !== id);
-    localStorage.setItem("productsInCart", JSON.stringify(filteredItems));
-    drawCartProductsUi(filteredItems);
-  }
-}
+drawFavoritesProductsUi();
+// function removeItemFromCart(id) {
+//   let productsFavorite = localStorage.getItem("productsFavorite");
+//   if (productsFavorite) {
+//     let items = JSON.parse(productsFavorite);
+//     let filteredItems = items.filter((item) => item.id !== id);
+//     localStorage.setItem("productsFavorite", JSON.stringify(filteredItems));
+//     drawFavoritesProductsUi(filteredItems);
+//   }
+// }
