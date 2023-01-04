@@ -1,19 +1,18 @@
 //setup variable
 let productDom = document.querySelector(".content-products");
-let cartProductDivDom = document.querySelector(".carts-products div");
 let cartProductMenu = document.querySelector(".carts-products");
+let cartProductDivDom = document.querySelector(".carts-products div");
 let shoppingCartIcon = document.querySelector(".shoppingCart");
 let badgeDom = document.querySelector(".badge");
-let products = JSON.parse(localStorage.getItem("products"));
+let products = productsLocalStorage;
 // open card menu
 shoppingCartIcon.addEventListener("click", openCartMenu);
 // display product
 let getProductsUi;
 (getProductsUi = function (products = []) {
   let productsUi = products.map((item) => {
-    console.log("eeee", item)
     return `
-        <div class="product-item d-flex">
+        <div class="product-item d-flex" style = "border:${item.isMe === "Y" ? "2px solid green":""}">
             <img
             src="${item.imageUrl}"
             alt="image"
@@ -21,52 +20,61 @@ let getProductsUi;
             />
             <div class="product-item-desc">
               <h2 onclick="saveItemData(${item.id})">${item.title}</h2>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+              <p> ${item.desc}</p>
               <span>Size: ${item.size}</span>
+              ${item.isMe === "Y" && "<button class='edit-product' onclick='editProduct("+item.id+")'> Edit </button>"}
             </div>
             <div class="product-item-action d-flex"> 
               <button class="add-to-cart" onclick="addToCart(${item.id})">
                 Add To Cart
               </button>
-              <i class="far fa-heart" style ="color: ${item.liked == true ? "red" :""}" onclick="addToFavorite(${item.id})"></i>
+              <i class="far fa-heart" style ="color: ${
+                item.liked == true ? "red" : ""
+              }" onclick="addToFavorite(${item.id})"></i>
             </div>
           </div>
         `;
   });
-  productDom.innerHTML = productsUi;
-})(JSON.parse(localStorage.getItem("products")));
+  productDom.innerHTML = productsUi.join("");
+})(JSON.parse(localStorage.getItem("products")) || productsLocalStorage);
+
 // Check if there's item in localstorage
-let addedItem = [];
-(function cartMenuData() {
-  addedItem = localStorage.getItem("productsInCart")
-    ? JSON.parse(localStorage.getItem("productsInCart"))
-    : [];
-  if (addedItem) {
-    addedItem.map(
-      (item) => (cartProductDivDom.innerHTML += `<p>${item.title} ${item.qty}</p>`)
-    );
-    badgeDom.style.display = "block";
-    badgeDom.innerHTML = addedItem.length;
-  }
-})();
+let addedItem = localStorage.getItem("productsInCart")
+  ? JSON.parse(localStorage.getItem("productsInCart"))
+  : [];
+if (addedItem) {
+  addedItem.map((item) => {
+    cartProductDivDom.innerHTML += `<p>${item.title} ${item.qty}</p>`;
+  });
+  badgeDom.style.display = "block";
+  badgeDom.innerHTML = addedItem.length;
+}
+
 // Add to cart
-let allItems = [];
 function addToCart(id) {
   if (localStorage.getItem("username")) {
-    let choosenItem = products.find((item) => item.id === id);
-    let item = allItems.find((item) => item.id === choosenItem.id);
-    if (item) {
-      choosenItem.qty += 1;
+    let products = JSON.parse(localStorage.getItem("products")) || productsLocalStorage;
+    let product = products.find((item) => item.id === id);
+    let isProductInCart = addedItem.some((i) => i.id === product.id);
+    if (isProductInCart) {
+      addedItem = addedItem.map((p) => {
+        if (p.id === product.id) product.qty += 1;
+        return p;
+      });
     } else {
-      allItems.push(choosenItem);
+      addedItem.push(product);
     }
+
+    // UI
     cartProductDivDom.innerHTML = "";
-    allItems.forEach((item) => {
+    addedItem.forEach((item) => {
       cartProductDivDom.innerHTML += `<p>${item.title} ${item.qty}</p>`;
     });
-    addedItem = [...addedItem, choosenItem];
-    let uniqueProducts = getUniqueArr(addedItem, "id");
-    localStorage.setItem("productsInCart", JSON.stringify(uniqueProducts));
+
+    // Save Data
+    localStorage.setItem("productsInCart", JSON.stringify(addedItem));
+    
+    // Add Counter of Items
     let cartProductItems = document.querySelectorAll(".carts-products div p");
     badgeDom.style.display = "block";
     badgeDom.innerHTML = cartProductItems.length;
@@ -78,8 +86,8 @@ function getUniqueArr(arr, filterType) {
   let unique = arr
     .map((item) => item[filterType])
     .map((item, i, finalarr) => finalarr.indexOf(item) === i && i)
-    .filter(item => arr[item])
-    .map(item => arr[item]);
+    .filter((item) => arr[item])
+    .map((item) => arr[item]);
   return unique;
 }
 // open card menu
@@ -104,29 +112,47 @@ inputSearch.addEventListener("keyup", function (e) {
     getProductsUi(JSON.parse(localStorage.getItem("products")));
 });
 function search(title, myArray) {
-  let arr = myArray.filter((item) => item.title.indexOf(title) !== -1);
+  let arr = myArray.filter((item) => item.title.toLowerCase().indexOf(title.toLowerCase()) !== -1);
   getProductsUi(arr);
 }
 // add to favorite
 
 let favoriteItems = localStorage.getItem("productsFavorite")
-    ? JSON.parse(localStorage.getItem("productsFavorite"))
-    : [];
+  ? JSON.parse(localStorage.getItem("productsFavorite"))
+  : [];
 function addToFavorite(id) {
   if (localStorage.getItem("username")) {
     let choosenItem = products.find((item) => item.id === id);
     choosenItem.liked = true;
-    favoriteItems = [...favoriteItems,choosenItem]
+    favoriteItems = [...favoriteItems, choosenItem];
     let uniqueProducts = getUniqueArr(favoriteItems, "id");
     localStorage.setItem("productsFavorite", JSON.stringify(uniqueProducts));
-    products.map(item => {
-      if(item.id === choosenItem.id){
-        item.liked = true
+    products.map((item) => {
+      if (item.id === choosenItem.id) {
+        item.liked = true;
       }
-    })
-    localStorage.setItem("products",JSON.stringify(products))
-    getProductsUi(products)
+    });
+    localStorage.setItem("products", JSON.stringify(products));
+    getProductsUi(products);
   } else {
     window.location = "login.html";
   }
+}
+// Filter Product By Size
+let sizeFilter = document.getElementById('size-filter')
+sizeFilter.addEventListener('change',getProductsFilteredBySize)
+function getProductsFilteredBySize(e){
+  let val = e.target.value;
+  let products = JSON.parse(localStorage.getItem("products")) || products;
+  if (val === "all"){
+    getProductsUi(products)
+  }else {
+    products = products.filter(i => i.size === val)
+    getProductsUi(products)
+  }
+}
+// Edit Product
+function editProduct(id){
+  localStorage.setItem("editProduct",id)
+  window.location = "editProduct.html"
 }

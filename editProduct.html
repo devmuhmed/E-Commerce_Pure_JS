@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shopping Cart | Cart Product</title>
+    <title>Shopping Cart | Edit Product</title>
     <!-- Font Awesome Library -->
     <link
       rel="stylesheet"
@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/normalize.css" />
     <!--Main Template CSS File -->
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/createProduct.css" />
   </head>
   <body>
     <!-- Start Header-->
@@ -62,30 +63,31 @@
     </header>
     <!-- End Header -->
     <!-- start product -->
-    <section class="Products">
+    <section class="create-product-page">
       <div class="container">
-        <input type="text" id="search" placeholder="search by name" />
-        <div class="content d-flex">
-          <div class="content-products"></div>
-          <div class="products-filter">
-            <h2>Filter By Size</h2>
-            <select id="size-filter">
-              <option value="" hidden> Filter By Size</option>
-              <option value="all">all</option>
-              <option value="small">small</option>
-              <option value="medium">medium</option>
-              <option value="large">large</option>
+        <div class="create-product-content">
+          <form id="update-form">
+            <input type="file" id="upload-image" />
+            <input type="text" placeholder="Name ..." id="product-name" />
+            <input
+              type="text"
+              placeholder="Description ... "
+              id="product-desc"
+            />
+            <select name="" id="product-size">
+              <option value="" hidden>Select Size</option>
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="large">Large</option>
             </select>
-          </div>
+            <input type="submit" value="update" id="update-product-btn" />
+          </form>
         </div>
       </div>
-      <a href="createProduct.html" class="create-product">
-        <i class="fa fa-plus"></i>
-      </a>
     </section>
     <!-- start product -->
     <script src="js/user.js"></script>
     <script src="js/data.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/editProduct.js"></script>
   </body>
 </html>

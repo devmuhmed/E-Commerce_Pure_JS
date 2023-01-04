@@ -158,7 +158,7 @@ nav ul li a {
 /* End Form  */
 /* Start Product */
 .content-products {
-  width: 60%;
+  width: 50%;
   margin: 10px 0;
 }
 .content-products .product-item {
@@ -209,4 +209,48 @@ nav ul li a {
   height: 400px;
   object-fit: cover;
 }
-
+/* Start create product item */
+.create-product{
+  position: fixed;
+  bottom: 15px;
+  right: 50px;
+  width: 50px;
+  height: 50px;
+  background-color: #52057b;
+  color: white;
+  text-decoration: none;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+}
+.create-product:hover{
+  opacity: 0.8;
+}
+.content{
+ justify-content: space-between; 
+}
+.products-filter{
+  margin: 10px 0;
+  width: 45%;
+}
+#size-filter{
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 5px;
+  border: 1px solid #b5b5b5;
+  border-radius: 5px;
+  font-size: 15px;
+}
+.edit-product{
+  display: block;
+  /* width: 140px; */
+  border: none;
+  background-color: #52057b;
+  color: white;
+  padding: 5px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+/* End create product item */

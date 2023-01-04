@@ -17,27 +17,27 @@ function drawFavoritesProductsUi(allProducts = []) {
               />
               <div class="product-item-desc">
                 <h2>${item.title}</h2>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                <p> ${item.desc}</p>
                 <span>Size: ${item.size}</span>
                 <span>Quantity: ${item.qty}</span>
               </div>
               <div class="product-item-action d-flex"> 
-                <button class="add-to-cart">
+                <button class="add-to-cart" onclick="removeItemFromFavorite(${item.id})">
                   Remove From Favorites
                 </button>
               </div>
             </div>
           `;
   });
-  productDom.innerHTML = productsUi;
+  productDom.innerHTML = productsUi.join("");
 }
 drawFavoritesProductsUi();
-// function removeItemFromCart(id) {
-//   let productsFavorite = localStorage.getItem("productsFavorite");
-//   if (productsFavorite) {
-//     let items = JSON.parse(productsFavorite);
-//     let filteredItems = items.filter((item) => item.id !== id);
-//     localStorage.setItem("productsFavorite", JSON.stringify(filteredItems));
-//     drawFavoritesProductsUi(filteredItems);
-//   }
-// }
+function removeItemFromFavorite(id) {
+  let productsFavorite = localStorage.getItem("productsFavorite");
+  if (productsFavorite) {
+    let items = JSON.parse(productsFavorite);
+    let filteredItems = items.filter((item) => item.id !== id);
+    localStorage.setItem("productsFavorite", JSON.stringify(filteredItems));
+    drawFavoritesProductsUi(filteredItems);
+  }
+}

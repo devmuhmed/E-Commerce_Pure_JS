@@ -17,7 +17,7 @@ function drawCartProductsUi(allProducts = []) {
               />
               <div class="product-item-desc">
                 <h2>${item.title}</h2>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                <p> ${item.desc}</p>
                 <span>Size: ${item.size}</span>
                 <span>Quantity: ${item.qty}</span>
               </div>
@@ -29,7 +29,7 @@ function drawCartProductsUi(allProducts = []) {
             </div>
           `;
   });
-  productDom.innerHTML = productsUi;
+  productDom.innerHTML = productsUi.join("");
 }
 drawCartProductsUi();
 function removeItemFromCart(id) {
