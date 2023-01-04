@@ -1,12 +1,6 @@
 //setup variable
 let productDom = document.querySelector(".content-products");
-let cartProductMenu = document.querySelector(".carts-products");
-let cartProductDivDom = document.querySelector(".carts-products div");
-let shoppingCartIcon = document.querySelector(".shoppingCart");
-let badgeDom = document.querySelector(".badge");
 let products = productsLocalStorage;
-// open card menu
-shoppingCartIcon.addEventListener("click", openCartMenu);
 // display product
 let getProductsUi;
 (getProductsUi = function (products = []) {
@@ -36,29 +30,16 @@ let getProductsUi;
         `;
   });
   productDom.innerHTML = productsUi.join("");
-})(JSON.parse(localStorage.getItem("products")) || productsLocalStorage);
-
-// Check if there's item in localstorage
-let addedItem = localStorage.getItem("productsInCart")
-  ? JSON.parse(localStorage.getItem("productsInCart"))
-  : [];
-if (addedItem) {
-  addedItem.map((item) => {
-    cartProductDivDom.innerHTML += `<p>${item.title} ${item.qty}</p>`;
-  });
-  badgeDom.style.display = "block";
-  badgeDom.innerHTML = addedItem.length;
-}
-
+})(JSON.parse(localStorage.getItem("products")) || products);
 // Add to cart
 function addToCart(id) {
   if (localStorage.getItem("username")) {
-    let products = JSON.parse(localStorage.getItem("products")) || productsLocalStorage;
+    let products = JSON.parse(localStorage.getItem("products")) || products;
     let product = products.find((item) => item.id === id);
     let isProductInCart = addedItem.some((i) => i.id === product.id);
     if (isProductInCart) {
       addedItem = addedItem.map((p) => {
-        if (p.id === product.id) product.qty += 1;
+        if (p.id === product.id) p.qty += 1;
         return p;
       });
     } else {
@@ -68,7 +49,7 @@ function addToCart(id) {
     // UI
     cartProductDivDom.innerHTML = "";
     addedItem.forEach((item) => {
-      cartProductDivDom.innerHTML += `<p>${item.title} ${item.qty}</p>`;
+      cartProductDivDom.innerHTML += `<p>${item.title} <span class="item-qty">${item.qty}</span></p>`;
     });
 
     // Save Data
@@ -90,16 +71,7 @@ function getUniqueArr(arr, filterType) {
     .map((item) => arr[item]);
   return unique;
 }
-// open card menu
-function openCartMenu() {
-  if (cartProductDivDom.innerHTML != "") {
-    if (cartProductMenu.style.display == "block") {
-      cartProductMenu.style.display = "none";
-    } else {
-      cartProductMenu.style.display = "block";
-    }
-  }
-}
+
 function saveItemData(id) {
   localStorage.setItem("productId", id);
   window.location = "cartdetails.html";
@@ -116,7 +88,6 @@ function search(title, myArray) {
   getProductsUi(arr);
 }
 // add to favorite
-
 let favoriteItems = localStorage.getItem("productsFavorite")
   ? JSON.parse(localStorage.getItem("productsFavorite"))
   : [];

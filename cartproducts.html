@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shopping Cart | Login Page</title>
+    <title>Shopping Cart | Cart Page</title>
     <!-- Font Awesome Library -->
     <link
       rel="stylesheet"
@@ -40,7 +40,13 @@
             </ul>
             <ul id="users">
               <li>
-                <a href="#" id="user"></a>
+                <a href="profile.html" id="user"></a>
+              </li>
+              <li>
+                <a href="favorites.html"> Favorites</a>
+              </li>
+              <li>
+                <a href="myproducts.html"> My Products</a>
               </li>
               <li class="shoppingCart">
                 <i class="fas fa-shopping-cart"></i>
@@ -67,9 +73,13 @@
         <div class="noproducts">
         </div>
       </div>
+      <a href="createProduct.html" class="create-product">
+        <i class="fa fa-plus"></i>
+      </a>
     </section>
     <!-- start product -->
     <script src="js/user.js"></script>
+    <script src="js/cartMenu.js"></script>
     <script src="js/carts.js"></script>
   </body>
 </html>

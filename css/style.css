@@ -254,3 +254,13 @@ nav ul li a {
   border-radius: 10px;
 }
 /* End create product item */
+.item-qty{
+  display:inline-block; 
+  width:15px;
+  height:15px;
+  background-color:black;color:white;
+  border-radius:50%;
+  text-align:center;
+  line-height:15px;
+  font-size:10px;
+}
