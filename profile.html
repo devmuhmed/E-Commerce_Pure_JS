@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shopping Cart | My Products Page</title>
+    <title>Shopping Cart | Profile Page</title>
     <!-- Font Awesome Library -->
     <link
       rel="stylesheet"
@@ -59,6 +59,9 @@
               <li>
                 <a href="#" id="logout">Logout</a>
               </li>
+              <li class="d-flex">
+                <a id="arabic" onclick="changeDirArab()" style="cursor: pointer;">ar</a> | <a id="english" onclick="changeDirEng()" style="cursor:pointer;">en</a>
+              </li>
             </ul>
           </nav>
         </div>
@@ -66,13 +69,14 @@
     </header>
     <!-- End header Section -->
     <!-- start product -->
-    <section class="Products">
-      <div class="container">
-        <div class="content-products">
+    <section class="Profile-page">
+        <div class="container">
+          <img src="img/kilwa.jpg" alt="avatar" class="user-avatar">
+          <h2 id="username"></h2>
+          <p id="email"></p>
+          <p id="productsLength"> Products Length : <span></span></p>
+          <a href="editProfile.html">Edit Profile</a>
         </div>
-        <div class="noproducts">
-        </div>
-      </div>
       <a href="createProduct.html" class="create-product">
         <i class="fa fa-plus"></i>
       </a>
@@ -81,5 +85,7 @@
     <script src="js/user.js"></script>
     <script src="js/data.js"></script>
     <script src="js/cartMenu.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/lang.js"></script>
   </body>
 </html>

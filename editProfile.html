@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shopping Cart | My Products Page</title>
+    <title>Shopping Cart | Create Product</title>
     <!-- Font Awesome Library -->
     <link
       rel="stylesheet"
@@ -21,10 +21,10 @@
     <link rel="stylesheet" href="css/normalize.css" />
     <!--Main Template CSS File -->
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/register.css" />
+    <link rel="stylesheet" href="css/createProduct.css" />
   </head>
   <body>
-    <!-- Start header Section -->
+    <!-- Start Header-->
     <header>
       <div class="container">
         <div class="header-content d-flex">
@@ -67,13 +67,17 @@
         </div>
       </div>
     </header>
-    <!-- End header Section -->
+    <!-- End Header -->
     <!-- start product -->
-    <section class="Products">
+    <section class="create-profile-page">
       <div class="container">
-        <div class="content-products">
-        </div>
-        <div class="noproducts">
+        <div class="create-product-content">
+          <form id="edit-profile-form">
+            <input type="file" id="upload-image" />
+            <input type="text" placeholder="Name ..." id="changeName" />
+            <input type="email" placeholder="Email ..." id="changeEmail" />
+            <input type="submit" value="Edit Profile" id="edit-profile-btn" />
+          </form>
         </div>
       </div>
       <a href="createProduct.html" class="create-product">
@@ -84,7 +88,7 @@
     <script src="js/user.js"></script>
     <script src="js/data.js"></script>
     <script src="js/cartMenu.js"></script>
-    <script src="js/myproducts.js"></script>
+    <script src="js/editProfile.js"></script>
     <script src="js/lang.js"></script>
   </body>
 </html>
